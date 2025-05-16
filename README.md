@@ -1,8 +1,6 @@
-DeveloperStore - Sales API
-
 ## 📌 Descrição do Projeto
 
-Esta é a **API de Vendas (Sales API)** da DeveloperStore, responsável por registrar, consultar, atualizar e cancelar vendas realizadas nos diversos pontos de venda da rede.
+Esta é a **API de Vendas** da DeveloperStore, responsável por registrar e consultar vendas realizadas nos diversos pontos de venda da rede.
 
 A API segue princípios de DDD (Domain-Driven Design), com aplicação do padrão **External Identities** para integrar dados de clientes, produtos e filiais. Além disso, respeita regras de negócio de descontos por quantidade e publica eventos relevantes no domínio (via logs).
 
