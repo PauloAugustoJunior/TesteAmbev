@@ -1,4 +1,5 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Common;
+using Ambev.DeveloperEvaluation.Domain.Entities;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
@@ -58,5 +59,15 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         /// Each item represents a product sold in the transaction.
         /// </summary>
         public List<SaleItem> SaleItems { get; set; } = new();
+
+        public void Calculate()
+        {
+            TotalAmount = 0;
+            SaleItems.ForEach(item =>
+            {
+                TotalAmount += (decimal)item.Total;
+            });
+        }
     }
 }
+

@@ -19,18 +19,15 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
 
         builder.Property(p => p.Description);
 
-        builder.Property(p => p.Category);
-
         builder.Property(p => p.Image);
 
-        builder.OwnsOne(p => p.Rating, rating =>
-        {
-            rating.Property(r => r.Rate).HasColumnName("RatingRate");
-            rating.Property(r => r.Count).HasColumnName("RatingCount");
-        });
+        builder.Property(p => p.BranchId)
+            .IsRequired()
+            .HasColumnType("uuid");
 
-        builder.HasMany(p => p.ProductCategories)
-               .WithOne(pc => pc.Product)
-               .HasForeignKey(pc => pc.ProductId);
+        builder.HasOne(p => p.Branch)
+            .WithMany()
+            .HasForeignKey(p => p.BranchId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

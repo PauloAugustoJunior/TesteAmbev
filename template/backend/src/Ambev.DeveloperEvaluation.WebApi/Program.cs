@@ -52,8 +52,14 @@ public class Program
 
             builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+            // Configurar logging
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+
             var app = builder.Build();
+            app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
             app.UseMiddleware<ValidationExceptionMiddleware>();
+            app.UseMiddleware<KeyNotFoundExceptionMiddleware>();
 
             if (app.Environment.IsDevelopment())
             {

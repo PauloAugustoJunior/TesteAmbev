@@ -1,86 +1,60 @@
-# Developer Evaluation Project
+DeveloperStore - Sales API
 
-`READ CAREFULLY`
+## 📌 Descrição do Projeto
 
-## Instructions
-**The test below will have up to 7 calendar days to be delivered from the date of receipt of this manual.**
+Esta é a **API de Vendas (Sales API)** da DeveloperStore, responsável por registrar, consultar, atualizar e cancelar vendas realizadas nos diversos pontos de venda da rede.
 
-- The code must be versioned in a public Github repository and a link must be sent for evaluation once completed
-- Upload this template to your repository and start working from it
-- Read the instructions carefully and make sure all requirements are being addressed
-- The repository must provide instructions on how to configure, execute and test the project
-- Documentation and overall organization will also be taken into consideration
+A API segue princípios de DDD (Domain-Driven Design), com aplicação do padrão **External Identities** para integrar dados de clientes, produtos e filiais. Além disso, respeita regras de negócio de descontos por quantidade e publica eventos relevantes no domínio (via logs).
 
-## Use Case
-**You are a developer on the DeveloperStore team. Now we need to implement the API prototypes.**
+## ✅ Funcionalidades Implementadas
 
-As we work with `DDD`, to reference entities from other domains, we use the `External Identities` pattern with denormalization of entity descriptions.
+- [x] Criar e consultar vendas
+- [x] Aplicação automática de descontos por quantidade:
+  - 4 a 9 unidades: 10%
+  - 10 a 20 unidades: 20%
+  - Mais de 20: não permitido
+- [x] Cálculo automático do valor total da venda e dos itens
+- [x] Suporte a múltiplos produtos por venda
 
-Therefore, you will write an API (complete CRUD) that handles sales records. The API needs to be able to inform:
+## 🧠 Tecnologias Utilizadas
 
-* Sale number
-* Date when the sale was made
-* Customer
-* Total sale amount
-* Branch where the sale was made
-* Products
-* Quantities
-* Unit prices
-* Discounts
-* Total amount for each item
-* Cancelled/Not Cancelled
+| Tecnologia            | Finalidade                                 |
+| --------------------- | ------------------------------------------ |
+| ASP.NET Core          | Framework principal para construção da API |
+| MediatR               | Aplicação de padrões DDD/CQRS              |
+| Entity Framework      | Acesso a dados com persistência em SQL     |
+| AutoMapper            | Mapeamento entre DTOs e entidades          |
+| FluentValidation      | Validações de entrada e regras de negócio  |
+| Swagger (Swashbuckle) | Documentação e testes dos endpoints        |
 
-It's not mandatory, but it would be a differential to build code for publishing events of:
-* SaleCreated
-* SaleModified
-* SaleCancelled
-* ItemCancelled
+## 🚀 Guia de Instalação e Execução
 
-If you write the code, **it's not required** to actually publish to any Message Broker. You can log a message in the application log or however you find most convenient.
+### Pré-requisitos
 
-### Business Rules
+- [.NET SDK 7.0+](https://dotnet.microsoft.com/download)
+- [PostgreSQL 14+](https://www.postgresql.org/download/)
 
-* Purchases above 4 identical items have a 10% discount
-* Purchases between 10 and 20 identical items have a 20% discount
-* It's not possible to sell above 20 identical items
-* Purchases below 4 items cannot have a discount
+### Executando Localmente
 
-These business rules define quantity-based discounting tiers and limitations:
+### 1. Clone o repositório  
 
-1. Discount Tiers:
-   - 4+ items: 10% discount
-   - 10-20 items: 20% discount
+```
+bash git clone https://github.com/seu-usuario/developerstore-sales-api.git
+cd developerstore-sales-api
+```
 
-2. Restrictions:
-   - Maximum limit: 20 items per product
-   - No discounts allowed for quantities below 4 items
+### 2. Configure a string de conexão PostgreSQL
 
-## Overview
-This section provides a high-level overview of the project and the various skills and competencies it aims to assess for developer candidates. 
+No arquivo `appsettings.Development.json`, edite a conexão para:
+`
+"ConnectionStrings": {
+	"DefaultConnection": "Host=localhost;Port=5432;Database=developerstore;Username=postgres;Password=senha" 
+}
+`
+### 3. Restaure os pacotes e execute as migrações
 
-See [Overview](/.doc/overview.md)
+`dotnet restore dotnet ef database update`
 
-## Tech Stack
-This section lists the key technologies used in the project, including the backend, testing, frontend, and database components. 
+### 4. Execute a aplicação
 
-See [Tech Stack](/.doc/tech-stack.md)
-
-## Frameworks
-This section outlines the frameworks and libraries that are leveraged in the project to enhance development productivity and maintainability. 
-
-See [Frameworks](/.doc/frameworks.md)
-
-<!-- 
-## API Structure
-This section includes links to the detailed documentation for the different API resources:
-- [API General](./docs/general-api.md)
-- [Products API](/.doc/products-api.md)
-- [Carts API](/.doc/carts-api.md)
-- [Users API](/.doc/users-api.md)
-- [Auth API](/.doc/auth-api.md)
--->
-
-## Project Structure
-This section describes the overall structure and organization of the project files and directories. 
-
-See [Project Structure](/.doc/project-structure.md)
+`dotnet run`
