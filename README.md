@@ -37,26 +37,43 @@ A API segue princípios de DDD (Domain-Driven Design), com aplicação do padrã
 
 ### Pré-requisitos
 
-- [.NET SDK 7.0+](https://dotnet.microsoft.com/download)
-- [PostgreSQL 14+](https://www.postgresql.org/download/)
+- [.NET SDK 8.0+](https://dotnet.microsoft.com/download)
+- [Docker](https://www.docker.com/get-started) (para execução em containers)
+
 
 ### Executando Localmente
 
 ### 1. Clone o repositório  
 
 ```bash
-bash git clone https://github.com/seu-usuario/developerstore-sales-api.git
-cd developerstore-sales-api
+bash git clone https://github.com/PauloAugustoJunior/TesteAmbev.git
+cd TesteAmbev\template\backend
 ```
 
-### 2. Configure a string de conexão PostgreSQL
+### 2. Configure os containers
 
-No arquivo `appsettings.Development.json`, edite a conexão para:
-```json
-"ConnectionStrings": {
-  "DefaultConnection": "Host=localhost;Port=5432;Database=developerstore;Username=postgres;Password=senha"
-}
+Para iniciar os containers necessários, como o banco de dados, execute o seguinte comando:
+
+```bash
+docker compose up -d
 ```
+
+Isso iniciará os containers em segundo plano. Aguarde até que a inicialização seja concluída antes de prosseguir com os próximos passos. Você pode verificar se os containers estão funcionando corretamente com o comando:
+
+```bash
+docker ps
+```
+
+#### 2.1 Desativar os containers
+Caso queira parar os containers em execução, use o seguinte comando:
+
+```bash
+docker compose down -v
+```
+
+Esse comando desativará e removerá os containers criados.
+
+
 ### 3. Restaure os pacotes e execute as migrações
 
 ```bash
@@ -69,6 +86,17 @@ dotnet ef database update
 ```bash
 dotnet run
 ```
+
+### 5. Acesse a documentação da API (Swagger)
+
+Após iniciar a aplicação com o comando acima, o terminal exibirá a URL local onde o backend está sendo executado (por exemplo, `http://localhost:5000`).
+
+Para visualizar a documentação interativa da API, acesse no navegador:
+
+http://localhost:5000/swagger/index.html
+
+> **Obs.:** Certifique-se de substituir `localhost:5000` pela porta correta informada no terminal, caso seja diferente.
+
 
 ## 🔮 Modificações Futuras
 
