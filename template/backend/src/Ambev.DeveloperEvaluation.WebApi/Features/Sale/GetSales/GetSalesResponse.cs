@@ -1,4 +1,4 @@
-using Ambev.DeveloperEvaluation.WebApi.Features.Branchs.GetBranch;
+using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Branchs.GetSales;
 
@@ -23,7 +23,7 @@ public class GetSalesResponse
     public int Size { get; set; }
 
     /// <summary>
-    /// The list of branch items returned for the current page
+    /// The list of sale items returned for the current page
     /// </summary>
-    public IEnumerable<GetBranchResponse> Items { get; set; } = Enumerable.Empty<GetBranchResponse>();
+    public IEnumerable<GetSaleResponse> Items { get; set; } = Enumerable.Empty<GetSaleResponse>();
 }

@@ -1,6 +1,7 @@
 ﻿using System.Linq.Dynamic.Core;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
+using Ambev.DeveloperEvaluation.WebApi.Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
@@ -93,6 +94,33 @@ public class SaleRepository : ISaleRepository
     public async Task<List<Sale>> GetAll(CancellationToken cancellationToken)
     {
         return await _context.Sales.AsNoTracking().ToListAsync(cancellationToken);
+    }
+
+    public async Task<bool> CancelAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var sale = await GetByIdAsync(id, cancellationToken);
+        if (sale == null)
+            return false;
+
+        sale.IsCancelled = true;
+        _context.Sales.Update(sale);
+        await _context.SaveChangesAsync(cancellationToken);
+        return true;
+    }
+
+    public async Task<PaginatedList<Sale>> GetPaginatedListAsync(int pageNumber, int pageSize, string? order, CancellationToken cancellationToken)
+    {
+        var query = _context.Sales.AsNoTracking();
+
+        if (!string.IsNullOrWhiteSpace(order))
+        {
+            query = query.OrderBy(order);
+        }
+        else
+        {
+            query = query.OrderBy("SaleDate");
+        }
+        return await PaginatedList<Sale>.CreateAsync(query, pageNumber, pageSize);
     }
 
 }

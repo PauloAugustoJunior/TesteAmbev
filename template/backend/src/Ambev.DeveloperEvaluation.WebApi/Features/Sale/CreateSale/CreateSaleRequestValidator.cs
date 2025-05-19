@@ -1,5 +1,4 @@
-﻿using Ambev.DeveloperEvaluation.WebApi.Features.SaleItems.CreateSaleItem;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 

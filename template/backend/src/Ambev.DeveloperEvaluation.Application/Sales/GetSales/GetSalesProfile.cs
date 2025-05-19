@@ -1,6 +1,5 @@
-using AutoMapper;
 using Ambev.DeveloperEvaluation.Domain.Entities;
-using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
+using AutoMapper;
 
 namespace Ambev.DeveloperEvaluation.Application.Branchs.GetSales;
 
@@ -14,7 +13,6 @@ public class GetSalesProfile : Profile
     /// </summary>
     public GetSalesProfile()
     {
-        CreateMap<Sale, GetSaleResult>();
-        CreateMap<GetSaleResult, Sale>();
+        CreateMap<Sale, GetSalesResult>();
     }
 }

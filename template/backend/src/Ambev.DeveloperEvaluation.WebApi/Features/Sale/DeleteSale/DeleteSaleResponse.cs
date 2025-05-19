@@ -1,4 +1,4 @@
-namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.UpdateSale;
+namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.DeleteSale;
 
 /// <summary>
 /// API response model for UpdateSale operation

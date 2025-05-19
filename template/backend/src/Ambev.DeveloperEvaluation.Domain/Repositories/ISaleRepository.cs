@@ -40,6 +40,10 @@ public interface ISaleRepository
     /// <returns>A task representing the asynchronous operation.</returns>
     Task UpdateAsync(Sale Sale, CancellationToken cancellationToken = default);
 
+    Task<bool> CancelAsync(Guid id, CancellationToken cancellationToken = default);
+
     Task<List<Sale>> GetAll(CancellationToken cancellationToken);
+
+    Task<PaginatedList<Sale>> GetPaginatedListAsync(int pageNumber, int pageSize, string? order, CancellationToken cancellationToken);
 
 }

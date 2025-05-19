@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Ambev.DeveloperEvaluation.Domain.Entities;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale;
+namespace Ambev.DeveloperEvaluation.Application.Sales.DeleteSale;
 
 /// <summary>
 /// Profile for mapping between Sale entity and UpdateSaleResult.

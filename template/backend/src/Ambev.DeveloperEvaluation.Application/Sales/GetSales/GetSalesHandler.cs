@@ -1,3 +1,5 @@
+using Ambev.DeveloperEvaluation.Application.Branchs.GetBranch;
+using Ambev.DeveloperEvaluation.Application.Branchs.GetBranches;
 using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using AutoMapper;
@@ -45,7 +47,20 @@ public class GetSalesHandler : IRequestHandler<GetSalesQuery, List<GetSaleResult
             cancellationToken: cancellationToken
         );
 
-        var mappedItems = _mapper.Map<List<GetSaleResult>>(sales);
-        return mappedItems;
+        var branches = await _saleRepository.GetPaginatedListAsync(
+            pageNumber: request.Page,
+            pageSize: request.Size,
+            order: request.Order,
+            cancellationToken: cancellationToken
+        );
+
+        var mappedItems = _mapper.Map<List<GetSaleResult>>(branches);
+
+        return new GetSalesResult(
+            mappedItems,
+            branches.TotalCount,
+            branches.CurrentPage,
+            branches.TotalPages
+        );
     }
 }

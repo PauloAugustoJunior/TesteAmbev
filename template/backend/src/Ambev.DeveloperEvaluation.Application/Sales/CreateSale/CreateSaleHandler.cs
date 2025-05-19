@@ -60,24 +60,10 @@ class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleResult>
 
         createdSale.Calculate();
         await _saleRepository.UpdateAsync(createdSale, cancellationToken);
+        await _mediator.Publish(new CreateSaleEvent(createdSale.Id));
 
         var result = _mapper.Map<CreateSaleResult>(createdSale);
         return result;
-
-        //await _saleRepository.AddAsync(sale);
-        //await _unitOfWork.CommitAsync();
-
-        //return new CreateSaleResult
-        //{
-        //    SaleId = sale.Id,
-        //    UserId = sale.UserId,
-        //    Date = sale.Date,
-        //    Products = sale.Products.Select(p => new SaleProductResult
-        //    {
-        //        ProductId = p.ProductId,
-        //        Quantity = p.Quantity
-        //    }).ToList()
-        //};
     }
 
     private async Task saveSaleItems(List<ProductToQuantity> listProductToQuantity, Sale createdSale)

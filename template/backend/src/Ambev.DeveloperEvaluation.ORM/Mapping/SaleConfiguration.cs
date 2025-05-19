@@ -13,7 +13,7 @@ public class SaleConfiguration : IEntityTypeConfiguration<Sale>
         builder.HasKey(u => u.Id);
         builder.Property(u => u.Id).HasColumnType("uuid").HasDefaultValueSql("gen_random_uuid()");
 
-        builder.Property(u => u.SaleNumber).IsRequired();
+        builder.Property(u => u.SaleNumber).IsRequired().ValueGeneratedOnAdd();
         builder.Property(u => u.TotalAmount).IsRequired();
         builder.Property(u => u.IsCancelled).IsRequired();
         builder.Property(u => u.SaleDate).HasColumnType("timestamptz").IsRequired();

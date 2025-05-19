@@ -13,7 +13,7 @@ public class GetSaleItemValidator : AbstractValidator<GetSaleItemQuery>
     public GetSaleItemValidator()
     {
         RuleFor(x => x.Id)
-            .NotEmpty().WithMessage("Please provide the branch ID.")
-            .Must(x => x != Guid.Empty).WithMessage("The branch ID cannot be empty.");
+            .NotEmpty().WithMessage("Please provide the SaleItem ID.")
+            .Must(x => x != Guid.Empty).WithMessage("The SaleItem ID cannot be empty.");
     }
 }

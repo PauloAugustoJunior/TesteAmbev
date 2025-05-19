@@ -4,7 +4,7 @@ using AutoMapper;
 using FluentValidation;
 using MediatR;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale;
+namespace Ambev.DeveloperEvaluation.Application.Sales.DeleteSale;
 
 /// <summary>
 /// Handler for processing UpdateSaleCommand requests
@@ -47,7 +47,8 @@ public class DeleteSaleHandler : IRequestHandler<DeleteSaleCommand, DeleteSaleRe
 
         await _branchRepository.DeleteAsync(command.Id, cancellationToken);
 
-        await _mediator.Send(new DeleteSaleItemCommand{Id = null, SaleId = command.Id});
+        await _mediator.Send(new DeleteSaleItemCommand { Id = null, SaleId = command.Id });
+        await _mediator.Publish(new DeleteSaleEvent(sale.Id));
 
         return _mapper.Map<DeleteSaleResult>(sale);
     }

@@ -16,7 +16,7 @@ public class GetBranchesValidator : AbstractValidator<GetBranchesQuery>
             .GreaterThanOrEqualTo(0)
             .WithMessage("Size must be greater than or equal to 0")
             .LessThanOrEqualTo(100)
-            .WithMessage("O parâmetro 'Size' deve ser menor ou igual a 100.");
+            .WithMessage("The 'Size' parameter must be less than or equal to 100.");
 
         RuleFor(x => x.Page)
             .GreaterThanOrEqualTo(0)

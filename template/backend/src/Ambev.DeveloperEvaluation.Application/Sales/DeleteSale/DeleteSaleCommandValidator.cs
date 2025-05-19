@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ambev.DeveloperEvaluation.Application.Sales.UpdateSale;
+namespace Ambev.DeveloperEvaluation.Application.Sales.DeleteSale;
 
 /// <summary>
 /// Validator for <see cref="DeleteSaleCommand"/> that defines validation rules for branch creation.
@@ -15,6 +15,6 @@ public class DeleteSaleCommandValidator : AbstractValidator<DeleteSaleCommand>
     {
         RuleFor(sale => sale.Id)
             .NotEqual(Guid.Empty)
-            .WithMessage("ProductId is required and must be a valid GUID.");
+            .WithMessage("SaleId is required and must be a valid GUID.");
     }
 }
